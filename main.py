@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 #command to run file : $ python3 ./main.py -a ./data/CGMData.csv -b ./data/InsulinData.csv
+
 import sys
 import os.path
 import getopt
@@ -7,7 +8,6 @@ import pandas as pd
 import csv
 from datetime import datetime, timedelta
 
-#from pandas.core.indexes.base import Index
 
 def isFile(fileName):
     if(not os.path.isfile(fileName)):
@@ -23,6 +23,7 @@ def readfile(argv):
         opts, args = getopt.getopt(argv,"a:b:")
     except getopt.GetoptError:
         sys.exc_info()
+        
     for opt, arg in opts:
         if opt == "-a":
             cgm_data_file = arg
@@ -147,11 +148,6 @@ if __name__ == '__main__':
         
         auto_metric_data = dict(zip(cgm, manual_val_list))
         print(f"\n Auto mode metric data: \n {auto_metric_data}")
-
-        #final = [manual_val_list, auto_val_list]
-        #final_df = pd.DataFrame(final)
-        #print(final_df)
-        #final_df.to_csv('./Results.csv', index=False, header=False)
 
     except:
         print("\n*** Extracting Time Series Properties of Glucose Levels in Artificial Pancreas Processing Failed *** ", sys.exc_info())
